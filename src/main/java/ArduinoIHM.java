@@ -14,6 +14,9 @@ import com.fazecast.jSerialComm.SerialPort;
  */
 public class ArduinoIHM extends javax.swing.JFrame {
 
+	// Conexão com arduino
+	ArduinoConnection con = new ArduinoConnection();
+	
     /**
      * Creates new form ArduinoIHM
      */
@@ -152,25 +155,6 @@ public class ArduinoIHM extends javax.swing.JFrame {
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trataBotoes(evt);
-                // TESTE CONECTANDO COM ARDUINO: Enviando "1" para acender a luz, e "0" para apagar a luz 8.
-                for (SerialPort port: SerialPort.getCommPorts()) {
-                    if(port.getSystemPortName().equals("COM11")) {
-                        if(port.openPort()) {
-                            PrintWriter writer = new PrintWriter(port.getOutputStream());
-
-                            String value = jButton8.getText().equals("Ligar") ? "0" : "1";
-                            writer.print(value);
-                            writer.flush();
-
-                            port.closePort();
-                        }
-                        
-                        else {
-                        	System.out.println("Não conseguimos conectar com o arduino");
-                        }
-                    }
-                }
-                // FIM
             }
         });
 
@@ -281,12 +265,18 @@ public class ArduinoIHM extends javax.swing.JFrame {
         {
             generico.setText("Desligar");
             ArduinoBLL.ligaDispositivo(generico.getName());
+            // Enviando a informação ao arduino, via java
+            con.mudaValorLed("1");
+            // END
             jTextField1.setText(ArduinoBLL.mostraBits(ArduinoBLL.getDisplay()));
         }
         else
         {
             generico.setText("Ligar");
             ArduinoBLL.desligaDispositivo(generico.getName());
+            // Enviando a informação ao arduino, via java
+            con.mudaValorLed("0");
+            // END
             jTextField1.setText(ArduinoBLL.mostraBits(ArduinoBLL.getDisplay()));
         }
     }//GEN-LAST:event_trataBotoes

@@ -1,12 +1,24 @@
+import java.io.PrintWriter;
+
 import com.fazecast.jSerialComm.SerialPort;
 
 public class ArduinoConnection {
+    PrintWriter writer;
+    SerialPort port = SerialPort.getCommPort("COM11");
 
-	SerialPort serialPort;
-	
-	public ArduinoConnection(SerialPort serial) {
-		this.serialPort = serial;
-	}
-	
-	
+    public ArduinoConnection() {
+        writer = new PrintWriter(port.getOutputStream());
+    }
+
+    public void mudaValorLed(String data) {
+        if(port.openPort()) {
+            writer.print(data);
+            writer.flush();
+            port.closePort();
+        }
+        
+        else {
+        	System.out.println("Não conseguimos conectar com o arduino");
+        }
+    }
 }
