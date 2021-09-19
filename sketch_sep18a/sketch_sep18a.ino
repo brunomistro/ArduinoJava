@@ -1,13 +1,16 @@
+int led = 7;
+
 void setup() {
-  	Serial.begin(9600);
+	Serial.begin(9600);
+	pinMode(led, OUTPUT);
 }
 
 void loop() {
-	char led = (int) Serial.read();
-	
-	Serial.println(led);
-	
-	if(led > 0 && led < 8) {
-		digitalWrite(led, digitalRead(led));
+	char acao = Serial.read();
+
+	if(acao == '1') {
+		digitalWrite(led, HIGH);
+	} else if(acao == '0') {
+		digitalWrite(led, LOW);
 	}
 }
