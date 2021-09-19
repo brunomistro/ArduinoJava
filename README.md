@@ -1,7 +1,7 @@
 # ArduinoJava
 Interacting with Arduino in JAVA
 
-O arquivo arduino.simu é o qual se encontra na raíz do projeto, será usado no emulador de arduino (no nosso caso, foi o SimulIDE).
+O arquivo arduino.simu o qual se encontra na raíz do projeto, será usado no emulador de arduino (no nosso caso, foi o SimulIDE).
 
 Detro da pasta codigo-arduino, estarão os arquivos em C++ que fazem o processo de ligar/desligar as lampadas.
 
