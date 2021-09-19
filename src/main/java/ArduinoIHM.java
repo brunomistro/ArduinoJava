@@ -152,23 +152,21 @@ public class ArduinoIHM extends javax.swing.JFrame {
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trataBotoes(evt);
-                // TESTE CONEXÃO ARDUINO
-                SerialPort[] ports = SerialPort.getCommPorts();
-
-                for (SerialPort port: ports) {
-                    System.out.println(port);
-                    String nomePorta = port.getSystemPortName();
-
-                    if(nomePorta.trim() == "COM11") {
-                        System.out.println("Porta com liberada disponivel");
+                // TESTE CONECTANDO COM ARDUINO: Enviando "1" para acender a luz, e "0" para apagar a luz 8.
+                for (SerialPort port: SerialPort.getCommPorts()) {
+                    if(port.getSystemPortName().equals("COM11")) {
                         if(port.openPort()) {
-                            System.out.println("Portaconectada com COM11!");
                             PrintWriter writer = new PrintWriter(port.getOutputStream());
 
-                            writer.print("1");
+                            String value = jButton8.getText().equals("Ligar") ? "0" : "1";
+                            writer.print(value);
                             writer.flush();
 
                             port.closePort();
+                        }
+                        
+                        else {
+                        	System.out.println("Não conseguimos conectar com o arduino");
                         }
                     }
                 }
