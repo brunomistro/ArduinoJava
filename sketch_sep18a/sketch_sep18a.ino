@@ -1,4 +1,5 @@
-int led = 7;
+int led = 13;
+char input;
 
 void setup() {
 	Serial.begin(9600);
@@ -6,11 +7,15 @@ void setup() {
 }
 
 void loop() {
-	char acao = Serial.read();
-
-	if(acao == '1') {
+	input = Serial.read();
+	
+	if(input == '1') {
 		digitalWrite(led, HIGH);
-	} else if(acao == '0') {
+		Serial.print(input);
+	}
+	
+	if(input == '0') {
 		digitalWrite(led, LOW);
+		Serial.print(input);
 	}
 }
