@@ -10,9 +10,9 @@ public class ArduinoConnection {
         writer = new PrintWriter(port.getOutputStream());
     }
 
-    public void mudaValorLed(String data) {
+    public void mudaValorLed(int lampada) {
         if(port.openPort()) {
-            writer.print(data);
+        	writer.print(Integer.toString(lampada));
             writer.flush();
             port.closePort();
         }

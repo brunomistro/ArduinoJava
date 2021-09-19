@@ -266,7 +266,7 @@ public class ArduinoIHM extends javax.swing.JFrame {
             generico.setText("Desligar");
             ArduinoBLL.ligaDispositivo(generico.getName());
             // Enviando a informação ao arduino, via java
-            con.mudaValorLed("1");
+            con.mudaValorLed(Integer.parseInt(generico.getName()) - 1);
             // END
             jTextField1.setText(ArduinoBLL.mostraBits(ArduinoBLL.getDisplay()));
         }
@@ -275,7 +275,7 @@ public class ArduinoIHM extends javax.swing.JFrame {
             generico.setText("Ligar");
             ArduinoBLL.desligaDispositivo(generico.getName());
             // Enviando a informação ao arduino, via java
-            con.mudaValorLed("0");
+            con.mudaValorLed(Integer.parseInt(generico.getName()) - 1);
             // END
             jTextField1.setText(ArduinoBLL.mostraBits(ArduinoBLL.getDisplay()));
         }
