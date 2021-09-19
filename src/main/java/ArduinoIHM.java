@@ -1,3 +1,7 @@
+import java.io.PrintWriter;
+
+import com.fazecast.jSerialComm.SerialPort;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -148,6 +152,27 @@ public class ArduinoIHM extends javax.swing.JFrame {
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trataBotoes(evt);
+                // TESTE CONEXÃO ARDUINO
+                SerialPort[] ports = SerialPort.getCommPorts();
+
+                for (SerialPort port: ports) {
+                    System.out.println(port);
+                    String nomePorta = port.getSystemPortName();
+
+                    if(nomePorta.trim() == "COM11") {
+                        System.out.println("Porta com liberada disponivel");
+                        if(port.openPort()) {
+                            System.out.println("Portaconectada com COM11!");
+                            PrintWriter writer = new PrintWriter(port.getOutputStream());
+
+                            writer.print("1");
+                            writer.flush();
+
+                            port.closePort();
+                        }
+                    }
+                }
+                // FIM
             }
         });
 
