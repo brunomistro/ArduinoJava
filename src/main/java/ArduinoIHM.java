@@ -163,6 +163,8 @@ public class ArduinoIHM extends javax.swing.JFrame {
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
+                
+                con.mudaValorLed("10");
             }
         });
 
